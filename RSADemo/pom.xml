@@ -5,21 +5,14 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.ulknow</groupId>
-    <artifactId>JavaDemo</artifactId>
+    <artifactId>RSADemo</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <packaging>pom</packaging>
 
-
-    <modules>
-        <module>FdfsDemo</module>
-        <module>LuceneDemo</module>
-        <module>SolrDemo</module>
-        <module>KafkaDemo</module>
-        <module>RSADemo</module>
-    </modules>
-
-    <properties>
-        <solr.version>4.10.4</solr.version>
-    </properties>
-
+    <dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+        </dependency>
+    </dependencies>
 </project>
