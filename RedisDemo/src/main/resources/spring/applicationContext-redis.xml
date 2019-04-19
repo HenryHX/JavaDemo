@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context" xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:cache="http://www.springframework.org/schema/cache"
+       xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd
+	http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache-4.2.xsd
+	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.2.xsd
+	http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.2.xsd
+	http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.2.xsd">
+
+    <context:property-placeholder location="classpath*:properties/redis.properties" ignore-unresolvable="true"/>
+    <context:component-scan base-package="test"/>
+
+    <!--此步骤必须做，必须声明采用的缓存管理器是自己配置的redisCacheManager，否则会报错。-->
+    <cache:annotation-driven cache-manager="redisCacheManager"/>
+
+    <bean id="keyRedisSerializer" class="org.springframework.data.redis.serializer.StringRedisSerializer"/>
+    <bean id="valueRedisSerializer" class="org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer"/>
+
+    <!--连接池配置-->
+    <bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">
+        <property name="maxIdle" value="${redis.maxIdle}" />
+        <property name="maxWaitMillis" value="${redis.maxWait}" />
+        <property name="maxTotal" value="${redis.maxActive}"/>
+        <property name="testOnBorrow" value="${redis.testOnBorrow}" />
+    </bean>
+
+    <!--集群版-->
+    <!--配置了 Redis 集群的各个节点-->
+    <bean id="redisClusterConfiguration" class="org.springframework.data.redis.connection.RedisClusterConfiguration">
+        <property name="maxRedirects" value="5"/>
+        <property name="clusterNodes">
+            <set>
+                <bean class="org.springframework.data.redis.connection.RedisNode">
+                    <constructor-arg name="host" value="${redis.cluster.node1.host}"/>
+                    <constructor-arg name="port" value="${redis.cluster.node1.port}"/>
+                </bean>
+                <bean class="org.springframework.data.redis.connection.RedisNode">
+                    <constructor-arg name="host" value="${redis.cluster.node2.host}"/>
+                    <constructor-arg name="port" value="${redis.cluster.node2.port}"/>
+                </bean>
+                <bean class="org.springframework.data.redis.connection.RedisNode">
+                    <constructor-arg name="host" value="${redis.cluster.node3.host}"/>
+                    <constructor-arg name="port" value="${redis.cluster.node3.port}"/>
+                </bean>
+                <bean class="org.springframework.data.redis.connection.RedisNode">
+                    <constructor-arg name="host" value="${redis.cluster.node4.host}"/>
+                    <constructor-arg name="port" value="${redis.cluster.node4.port}"/>
+                </bean>
+                <bean class="org.springframework.data.redis.connection.RedisNode">
+                    <constructor-arg name="host" value="${redis.cluster.node5.host}"/>
+                    <constructor-arg name="port" value="${redis.cluster.node5.port}"/>
+                </bean>
+                <bean class="org.springframework.data.redis.connection.RedisNode">
+                    <constructor-arg name="host" value="${redis.cluster.node6.host}"/>
+                    <constructor-arg name="port" value="${redis.cluster.node6.port}"/>
+                </bean>
+            </set>
+        </property>
+    </bean>
+
+    <bean id="clusterJedisConnectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">
+        <constructor-arg name="clusterConfig" ref="redisClusterConfiguration"/>
+        <constructor-arg name="poolConfig" ref="jedisPoolConfig"/>
+        <property name="timeout" value="${redis.timeout}"/>
+        <property name="usePool" value="true"/>
+    </bean>
+
+    <bean id="clusterRedisTemplate" class="org.springframework.data.redis.core.RedisTemplate">
+        <property name="connectionFactory" ref="clusterJedisConnectionFactory"/>
+        <property name="keySerializer" ref="keyRedisSerializer"/>
+        <property name="hashKeySerializer" ref="keyRedisSerializer"/>
+        <property name="valueSerializer" ref="valueRedisSerializer"/>
+        <property name="hashValueSerializer" ref="valueRedisSerializer"/>
+    </bean>
+
+    <!-- 配置RedisCacheManager -->
+    <bean id="redisCacheManager" class="org.springframework.data.redis.cache.RedisCacheManager">
+        <constructor-arg ref="clusterRedisTemplate"/>
+        <property name="defaultExpiration" value="${redis.cache.defaultExpiration}"/>
+        <property name="expires">
+            <map>
+                <entry key="AccountCache" value="100"/>
+            </map>
+        </property>
+    </bean>
+
+    <!--扫包-->
+    <!--<bean id="keyGenerator" class="com.taotao.content.Utils.RedisCacheKeyGenerator"></bean>-->
+
+
+    <!--单机版-->
+    <bean id="jedisConnectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">
+        <constructor-arg name="poolConfig" ref="jedisPoolConfig"/>
+        <property name="hostName" value="${redis.host}"/>
+        <property name="port" value="${redis.port}"/>
+        <property name="timeout" value="${redis.timeout}"/>
+    </bean>
+
+    <bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate">
+        <property name="connectionFactory" ref="jedisConnectionFactory"/>
+        <property name="keySerializer" ref="keyRedisSerializer"/>
+        <property name="hashKeySerializer" ref="keyRedisSerializer"/>
+        <property name="valueSerializer" ref="valueRedisSerializer"/>
+        <property name="hashValueSerializer" ref="valueRedisSerializer"/>
+    </bean>
+
+    <!--<bean class="com.taotao.content.Utils.RedisUtil">-->
+        <!--<property name="redisTemplate" ref="clusterRedisTemplate"/>-->
+    <!--</bean>-->
+</beans>

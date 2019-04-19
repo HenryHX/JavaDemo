@@ -18,6 +18,7 @@
         <module>RSADemo</module>
         <module>ConcurrentDemo</module>
         <module>ActiveMQDemo</module>
+        <module>RedisDemo</module>
     </modules>
 
     <properties>
