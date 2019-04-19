@@ -16,6 +16,8 @@
         <module>SolrDemo</module>
         <module>KafkaDemo</module>
         <module>RSADemo</module>
+        <module>ConcurrentDemo</module>
+        <module>ActiveMQDemo</module>
     </modules>
 
     <properties>
