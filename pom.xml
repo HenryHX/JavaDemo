@@ -19,6 +19,7 @@
         <module>ConcurrentDemo</module>
         <module>ActiveMQDemo</module>
         <module>RedisDemo</module>
+        <module>FreemarkerDemo</module>
     </modules>
 
     <properties>
