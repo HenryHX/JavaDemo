@@ -1,0 +1,5 @@
+#!/bin/bash
+
+protoc --proto_path=. --java_out=.  --cpp_out=.  message.proto
+
+cp com/ulknow/grpc/examples/*.java  ../../java/com/ulknow/grpc/examples/

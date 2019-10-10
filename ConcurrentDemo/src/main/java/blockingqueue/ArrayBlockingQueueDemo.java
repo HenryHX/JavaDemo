@@ -2,6 +2,8 @@ package blockingqueue;
 
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * Created by Administrator
@@ -14,5 +16,8 @@ public class ArrayBlockingQueueDemo {
         queue.put("1");
         String str = queue.take();
         System.out.println(str);
+
+
+
     }
 }
