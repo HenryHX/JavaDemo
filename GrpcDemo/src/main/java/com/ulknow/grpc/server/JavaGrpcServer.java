@@ -25,6 +25,69 @@ public class JavaGrpcServer extends GreeterGrpc.GreeterImplBase {
         responseObserver.onCompleted();
     }
 
+    @Override
+    public StreamObserver<GrpcEntity.HelloRequest> sayHelloReqStream(StreamObserver<GrpcEntity.HelloReply> responseObserver) {
+        return new StreamObserver<GrpcEntity.HelloRequest>() {
+            @Override
+            public void onNext(GrpcEntity.HelloRequest helloRequest) {
+                System.out.print("server receive stream request, detail:" + TextFormat.printToUnicodeString(helloRequest));
+            }
+
+            @Override
+            public void onError(Throwable throwable) {
+
+            }
+
+            @Override
+            public void onCompleted() {
+                GrpcEntity.HelloReply helloReply = GrpcEntity.HelloReply.newBuilder().setMessage("处理完了所有的流req").build();
+                responseObserver.onNext(helloReply);
+                responseObserver.onCompleted();
+            }
+        };
+    }
+
+    @Override
+    public void sayHelloRepStream(GrpcEntity.HelloRequest request, StreamObserver<GrpcEntity.HelloReply> responseObserver) {
+        System.out.print("server receive request, detail:" + TextFormat.printToUnicodeString(request));
+
+        GrpcEntity.HelloReply helloReply = GrpcEntity.HelloReply.newBuilder().setMessage("thx from 测试:" + request.getName()).build();
+
+        responseObserver.onNext(helloReply);
+        responseObserver.onNext(helloReply);
+        responseObserver.onNext(helloReply);
+        try {
+            Thread.sleep(2000);
+        }
+        catch (Exception ex){}
+        responseObserver.onNext(helloReply);
+
+        responseObserver.onCompleted();
+    }
+
+    @Override
+    public StreamObserver<GrpcEntity.HelloRequest> sayHelloReqRepStream(StreamObserver<GrpcEntity.HelloReply> responseObserver) {
+        return new StreamObserver<GrpcEntity.HelloRequest>() {
+            @Override
+            public void onNext(GrpcEntity.HelloRequest helloRequest) {
+                System.out.print("server receive stream request, detail:" + TextFormat.printToUnicodeString(helloRequest));
+
+                GrpcEntity.HelloReply helloReply = GrpcEntity.HelloReply.newBuilder().setMessage("thx from 测试:" + helloRequest.getName()).build();
+                responseObserver.onNext(helloReply);
+            }
+
+            @Override
+            public void onError(Throwable throwable) {
+
+            }
+
+            @Override
+            public void onCompleted() {
+                responseObserver.onCompleted();
+            }
+        };
+    }
+
     public static void main(String[] args) throws IOException, InterruptedException {
         ServerBuilder.forPort(29999).addService(new JavaGrpcServer()).build().start();
         while (true) {

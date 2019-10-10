@@ -9,6 +9,12 @@ package helloworld;
 service Greeter {
   // Sends a greeting
   rpc SayHello (HelloRequest) returns (HelloReply) {}
+  //请求流
+  rpc SayHelloReqStream (stream HelloRequest) returns (HelloReply) {}
+  //响应流
+  rpc SayHelloRepStream (HelloRequest) returns (stream HelloReply) {}
+  //双向流接口
+  rpc SayHelloReqRepStream (stream HelloRequest) returns (stream HelloReply) {}
 }
 
 // The request message containing the user's name.

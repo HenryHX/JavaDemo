@@ -1101,10 +1101,16 @@ public final class GrpcEntity {
     String[] descriptorData = {
       "\n\rmessage.proto\022\nhelloworld\"\034\n\014HelloRequ" +
       "est\022\014\n\004name\030\001 \001(\t\"\035\n\nHelloReply\022\017\n\007messa" +
-      "ge\030\001 \001(\t2I\n\007Greeter\022>\n\010SayHello\022\030.hellow" +
-      "orld.HelloRequest\032\026.helloworld.HelloRepl" +
-      "y\"\000B&\n\030com.ulknow.grpc.examplesB\nGrpcEnt" +
-      "ityb\006proto3"
+      "ge\030\001 \001(\t2\257\002\n\007Greeter\022>\n\010SayHello\022\030.hello" +
+      "world.HelloRequest\032\026.helloworld.HelloRep" +
+      "ly\"\000\022I\n\021SayHelloReqStream\022\030.helloworld.H" +
+      "elloRequest\032\026.helloworld.HelloReply\"\000(\001\022" +
+      "I\n\021SayHelloRepStream\022\030.helloworld.HelloR" +
+      "equest\032\026.helloworld.HelloReply\"\0000\001\022N\n\024Sa" +
+      "yHelloReqRepStream\022\030.helloworld.HelloReq" +
+      "uest\032\026.helloworld.HelloReply\"\000(\0010\001B&\n\030co" +
+      "m.ulknow.grpc.examplesB\nGrpcEntityb\006prot" +
+      "o3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
