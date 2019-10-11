@@ -21,6 +21,7 @@
         <module>RedisDemo</module>
         <module>FreemarkerDemo</module>
         <module>GrpcDemo</module>
+        <module>CommonsDemo</module>
     </modules>
 
     <properties>
