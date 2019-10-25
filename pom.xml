@@ -22,6 +22,7 @@
         <module>FreemarkerDemo</module>
         <module>GrpcDemo</module>
         <module>CommonsDemo</module>
+        <module>LeetCodeDemo</module>
     </modules>
 
     <properties>
