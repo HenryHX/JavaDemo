@@ -87,6 +87,7 @@ public class SortArray912 {
 
     /**
      * 快速排序
+     * 理解快排的重点也是理解递推公式，quickSortImpl() 分区函数。
      *
      * @param nums
      * @return
@@ -101,6 +102,13 @@ public class SortArray912 {
         return nums;
     }
 
+    /**
+     * 分区，找到pivot将数组分成三部分
+     * 遍历startIndex~endIndex数据，将小于 pivot 的放到左边，将大于 pivot 的放到右边，将 pivot 放到中间
+     * @param nums
+     * @param startIndex
+     * @param endIndex
+     */
     private static void quickSortImpl(int[] nums, int startIndex, int endIndex) {
         if (startIndex >= endIndex) {
             return;
@@ -143,6 +151,7 @@ public class SortArray912 {
 
     /**
      * 归并排序
+     * 理解归并排序的重点是理解递推公式和 merge() 合并函数
      *
      * @param nums
      * @return
