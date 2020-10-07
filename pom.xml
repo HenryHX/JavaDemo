@@ -23,6 +23,8 @@
         <module>GrpcDemo</module>
         <module>CommonsDemo</module>
         <module>LeetCodeDemo</module>
+        <module>DisruptorDemo</module>
+        <module>NatsDemo</module>
     </modules>
 
     <properties>

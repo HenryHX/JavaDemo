@@ -174,7 +174,6 @@ public class DisruptorDSLExample {
                 int x = 0;
                 while (x++ < events / 2) {
                     disruptor.publishEvent(IntToExampleEventTranslator.INSTANCE, x);
-
                 }
             }
         });
@@ -187,6 +186,7 @@ public class DisruptorDSLExample {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+
         disruptorDSLExample.shutdown();
     }
 
