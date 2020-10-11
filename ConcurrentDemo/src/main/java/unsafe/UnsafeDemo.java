@@ -134,11 +134,12 @@ public class UnsafeDemo {
 
         int BYTE = 1;
         long address = unsafe.allocateMemory(BYTE);
-        unsafe.putByte(address, (byte) 10);
+        unsafe.putByte(address, (byte) 52);
         byte num = unsafe.getByte(address);
         System.out.println(num);
         unsafe.freeMemory(address);
         num = unsafe.getByte(address);
+        System.out.println(num);
     }
 
     /**

@@ -25,6 +25,7 @@
         <module>LeetCodeDemo</module>
         <module>DisruptorDemo</module>
         <module>NatsDemo</module>
+        <module>Java8Demo</module>
     </modules>
 
     <properties>

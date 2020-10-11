@@ -68,6 +68,7 @@ public class swapListPairs24 {
         ListNode pre = tmp;
 
         while (pre.next != null && pre.next.next != null) {
+            // pre -> node1 -> node2
             ListNode node1 = pre.next;
             ListNode node2 = pre.next.next;
             //交换node1和node2
