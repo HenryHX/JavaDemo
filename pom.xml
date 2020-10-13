@@ -26,6 +26,7 @@
         <module>DisruptorDemo</module>
         <module>NatsDemo</module>
         <module>Java8Demo</module>
+        <module>ReactorDemo</module>
     </modules>
 
     <properties>
