@@ -1,4 +1,4 @@
-package com.ulknow.elasticsearch;
+package com.ulknow.elasticsearch.base;
 
 import org.apache.http.HttpHost;
 import org.elasticsearch.client.Request;
@@ -18,7 +18,7 @@ import java.util.List;
 import static java.util.Collections.unmodifiableList;
 
 public class BaseTest {
-    protected String hostName = "";
+    protected String hostName = "47.98.175.96";
     protected int port = 9200;
 
 

@@ -1,4 +1,4 @@
-package com.ulknow.elasticsearch;
+package com.ulknow.elasticsearch.base;
 
 import org.apache.lucene.search.Explanation;
 import org.apache.lucene.search.TotalHits;

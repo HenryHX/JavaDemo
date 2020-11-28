@@ -1,4 +1,4 @@
-package com.ulknow.elasticsearch;
+package com.ulknow.elasticsearch.base;
 
 import org.elasticsearch.ElasticsearchException;
 import org.elasticsearch.action.ActionListener;

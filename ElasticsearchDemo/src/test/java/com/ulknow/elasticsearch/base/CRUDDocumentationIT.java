@@ -17,7 +17,7 @@
  * under the License.
  */
 
-package com.ulknow.elasticsearch;
+package com.ulknow.elasticsearch.base;
 
 import org.apache.http.HttpHost;
 import org.elasticsearch.ElasticsearchException;
