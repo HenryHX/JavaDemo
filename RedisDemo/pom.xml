@@ -12,7 +12,7 @@
         <spring.version>4.2.4.RELEASE</spring.version>
         <jedis.version>2.9.0</jedis.version>
         <spring.jedis.version>1.8.14.RELEASE</spring.jedis.version>
-        <jackson.version>2.4.2</jackson.version>
+        <jackson.version>2.12.7.1</jackson.version>
     </properties>
 
     <dependencies>
